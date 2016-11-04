@@ -7,11 +7,20 @@ class ChatBar extends Component {
   }
 
   handleSubmit(event) {
-    if (event.key === 'Enter'){
+    if (event.key === 'Enter') {
       let usernameValue = this.refs.usernameInputBox.value;
       let newMessageValue = this.refs.newMessageInputBox.value;
-      this.props.newMessage(usernameValue, newMessageValue);
-      this.refs.newMessageInputBox.value = "";
+
+      if (usernameValue.length === 0) {
+        usernameValue = "Anonymouse"
+      }
+      if (newMessageValue.length > 0) {
+        this.props.newMessage(usernameValue, newMessageValue);
+        this.refs.newMessageInputBox.value = "";
+      }
+      if (event.target.id == "new-message") {
+
+      }
     }
   }
 

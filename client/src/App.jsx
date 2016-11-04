@@ -9,7 +9,8 @@ class App extends Component {
     this.postNewMessage = this.postNewMessage.bind(this)
 
     this.state = {
-      currentUser: {name: ""},
+      userCount: 0,
+      currentUser: {name: 'Anonymouse'},
       messages: []
     };
   }
@@ -20,8 +21,16 @@ class App extends Component {
       console.log('Connected to server')
       this.socket.onmessage = (event) => {
         const newMessage = JSON.parse(event.data)
-        const post = this.state.messages.concat(newMessage)
-        this.setState({messages: post})
+        switch (newMessage.type) {
+          case "postMessage":
+          case "postNotification":
+            const post = this.state.messages.concat(newMessage)
+            this.setState({messages: post})
+            break;
+          case "userCount":
+            this.setState({userCount: newMessage.usersOnline})
+            break;
+        }
       }
     };
   }
@@ -29,17 +38,29 @@ class App extends Component {
     this.socket.send(JSON.stringify(messageObject))
   }
 
-  postNewMessage(name, content){
-    const newMessage = {username: name, content: content}
+  postNewMessage(name, content) {
     if (this.state.currentUser.name !== name) {
+      this.postNewNotification(name)
       this.state.currentUser.name = name
+      this.setState({currentUser: this.state.currentUser})
     }
-    this.setState(this.state)
-    // long form version of the above:
-    // this.setState({currentUser: this.state.currentUser})
-
+    const newMessage = {
+      type: 'postMessage',
+      username: name,
+      content: content
+    }
     this.sendMessageToServer(newMessage)
   }
+
+  postNewNotification(newUsername) {
+    const newMessage = {
+      type: 'postNotification',
+      oldUsername: this.state.currentUser.name,
+      newUsername: newUsername
+    }
+    this.sendMessageToServer(newMessage)
+  }
+
   render() {
     console.log(this.state)
     console.log(this.state.messages)
@@ -47,6 +68,7 @@ class App extends Component {
       <div className="wrapper">
         <nav>
           <h1>A/S/L?</h1>
+          <h6>Users Online{this.state.userCount}</h6>
         </nav>
         <div id="message-list">
           <MessageList data={this.state.messages}/>
