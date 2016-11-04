@@ -68,7 +68,7 @@ class App extends Component {
       <div className="wrapper">
         <nav>
           <h1>A/S/L?</h1>
-          <h6>Users Online{this.state.userCount}</h6>
+          <h6>Users Online {this.state.userCount}</h6>
         </nav>
         <div id="message-list">
           <MessageList data={this.state.messages}/>

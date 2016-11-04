@@ -1,7 +1,3 @@
-h1 {
-  color: #ffffff;
-}
-
 html, body {
   max-height: 100vh;
   max-width: 100vw;
@@ -19,7 +15,16 @@ nav {
 }
 
 nav h1 {
+  color: #ffffff;
   margin: 0;
+  position: fixed;
+  height: 20px;
+}
+
+nav h6 {
+  color: #ffffff;
+  float: right;
+  height: 20px;
 }
 
 #message-list {
