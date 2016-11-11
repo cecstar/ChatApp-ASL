@@ -1,30 +1,53 @@
-html, body {
+body {
+  font-family: 'Open Sans', sans-serif;
   max-height: 100vh;
   max-width: 100vw;
-  font-family: 'Open Sans', sans-serif;
 }
 
-.wrapper {
-  font-size: 14px;
+footer {
+  align-items: center;
+  background-color: #3f6a8a;
+  display: flex;
+  height: 41px;
+}
+
+footer input {
+  border: 1px solid black;
+  box-shadow: 1px 1px 10px black;
+  height: 20px;
+  margin: 4px;
+  padding: 4px 8px;
 }
 
 nav {
+  background-color: #3f6a8a;
+  box-shadow: 1px 4px 6px #888888;
   height: 40px;
   padding: 8px;
-  border-bottom: 1px solid black; background-color: #3f6a8a;
 }
 
 nav h1 {
   color: #ffffff;
+  font-size: 31px;
+  font-weight: 100;
+  height: 0px;
   margin: 0;
+  padding: 5px;
   position: fixed;
-  height: 20px;
 }
 
-nav h6 {
+nav h4 {
   color: #ffffff;
   float: right;
+  font-weight: 100;
   height: 20px;
+  line-height: 3em;
+  margin-right: 10px;
+  margin-top: initial;
+}
+
+.wrapper {
+  font-size: 14px;
 }
 
 #message-list {
@@ -33,50 +56,35 @@ nav h6 {
 }
 
 #message-list .message {
-  padding: 4px 0;
   display: flex;
-}
-
-#message-list .message .username, #message-list .message .content {
-  display: inline-block;
   padding: 4px 0;
-}
-
-#message-list .message .username {
-  flex: 15;
-  margin-right: 16px;
-  overflow: hidden;
-  font-weight: 700;
 }
 
 #message-list .message .content {
   flex: 85;
 }
 
-#message-list .message.system {
-  font-weight: 400;
+#message-list .message .system {
   font-style: italic;
+  font-weight: 400;
 }
 
-footer {
-  height: 41px;
-  border-top: 1px solid black;
-  background-color: #3f6a8a;
-  display: flex;
-  align-items: center;
+#message-list .message .username {
+  flex: 15;
+  font-weight: 700;
+  margin-right: 16px;
+  overflow: hidden;
 }
 
-footer input {
-  border: 1px solid black;
-  margin: 4px;
-  height: 20px;
-  padding: 4px 8px;
+#message-list .message .username .message .content {
+  display: inline-block;
+  padding: 4px 0;
 }
 
-footer #username {
-  flex: 3;
-}
-
-footer #new-message {
+ #new-message {
   flex: 7;
+}
+
+ #username {
+  flex: 3;
 }

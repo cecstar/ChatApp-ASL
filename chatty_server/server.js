@@ -17,7 +17,6 @@ wss.broadcast = function broadcast(data) {
 };
 
 let messageId = 1;
-
 let usersOnline = 0;
 wss.on('connection', function connection(ws) {
 
@@ -39,14 +38,14 @@ wss.on('connection', function connection(ws) {
     //  console.log("messageHandlers[messageObject.type] is ", messageHandlers[messageObject.type])
     //  messageHandlers[messageObject.type](messageObject);
 
-     if(messageObject.type === "postMessage") {
-       wss.broadcast(JSON.stringify(messageObject));
-     } else if(messageObject.type === "postNotification") {
-       wss.broadcast(JSON.stringify(messageObject));
-     } else {
-       throw new Error("Could not recognize message type " + messageObject.type);
-     }
-   });
+    if(messageObject.type === "postMessage") {
+     wss.broadcast(JSON.stringify(messageObject));
+    } else if(messageObject.type === "postNotification") {
+     wss.broadcast(JSON.stringify(messageObject));
+    } else {
+     throw new Error("Could not recognize message type " + messageObject.type);
+    }
+  });
 
    ws.on('close', function () {
      usersOnline -= 1;
